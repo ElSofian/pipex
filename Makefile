@@ -6,24 +6,20 @@
 #    By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/02 19:46:45 by soelalou          #+#    #+#              #
-#    Updated: 2023/12/03 17:45:55 by soelalou         ###   ########.fr        #
+#    Updated: 2023/12/03 18:06:14 by soelalou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # **************************************************************************** #
 # VARIABLES
 
-NAME        = pipex.a
+NAME        = pipex
 LIBFT		= libft/libft.a
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS		= src/main.c
-
-OBJ_DIR     = bin
-OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-
+SRCS		= src/main.c libft/libft.a
 
 # **************************************************************************** #
 # COLORS
@@ -48,11 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)[Success]$(END_COLOR) Pipex is ready!"
-	@$(CC) $(CFLAGS) $(OBJS) -I inc $(LIBFT) -o pipex
-
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -I inc -c $< -o $@
+	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJ_DIR)
@@ -60,7 +52,8 @@ clean:
 	@echo "$(GREY)[Clean]$(END_COLOR) Objects have been deleted !"
 
 fclean: clean
-	@$(RM) bin $(NAME) pipex
+	@$(RM) bin $(NAME)
+	@make fclean -s -C libft
 	@echo "$(GREY)[Clean]$(END_COLOR) $(NAME) and executables have been deleted !"
 
 re: fclean all

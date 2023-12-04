@@ -6,7 +6,7 @@
 #    By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/02 19:46:45 by soelalou          #+#    #+#              #
-#    Updated: 2023/12/03 18:06:14 by soelalou         ###   ########.fr        #
+#    Updated: 2023/12/04 10:46:37 by soelalou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS		= src/main.c libft/libft.a
+SRCS		= src/main.c src/utils.c src/pipes.c src/errors.c libft/libft.a
 
 # **************************************************************************** #
 # COLORS
@@ -56,7 +56,7 @@ fclean: clean
 	@make fclean -s -C libft
 	@echo "$(GREY)[Clean]$(END_COLOR) $(NAME) and executables have been deleted !"
 
-re: fclean all
+re: fclean dependencies
 	@echo "$(PURPLE)[Rebuild]$(END_COLOR) Done !"
 
 .PHONY: all clean fclean re

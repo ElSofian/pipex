@@ -5,10 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 07:54:47 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/04 11:27:05 by soelalou         ###   ########.fr       */
+/*   Created: 2023/12/06 11:54:21 by soelalou          #+#    #+#             */
+/*   Updated: 2023/12/06 18:03:50 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
+char	*get_cmd_name(char *cmd)
+{
+	int		i;
+	int		j;
+	char	*cmd_name;
+
+	i = 0;
+	while (cmd[i] >= 'a' && cmd[i] <= 'z')
+		i++;
+	j = 0;
+	cmd_name = (char *)malloc(sizeof(char) * (i + 1));
+	if (!cmd_name)
+		return (NULL);
+	while (j < i)
+	{
+		cmd_name[j] = cmd[j];
+		j++;
+	}
+	cmd_name[j] = '\0';
+	return (cmd_name);
+}
+
+char	**get_path_dirs(char **env)
+{
+	int	i;
+	char	**dirs;
+
+	i = 0;
+	while (ft_strncmp("PATH", env[i], 4) != 0)
+		i++;
+	dirs = ft_split(env[i] + 5, ':');
+	return (dirs);
+}
+
+char	*get_cmd_path(char *cmd, char **env)
+{
+	int		i;
+	int		len;
+	char	*path;
+	char	**dirs;
+
+	i = 0;
+	path = NULL;
+	dirs = get_path_dirs(env);
+	if (!dirs)
+		return (NULL);
+	while (dirs[i])
+	{
+		len = ft_strlen(dirs[i]) + ft_strlen(cmd) + 2;
+		path = (char *)malloc(sizeof(char) * len);
+		if (!path)
+			return (NULL);
+		ft_strcpy(path, dirs[i]);
+		ft_strcat(path, "/");
+		ft_strcat(path, cmd);
+		if (access(path, F_OK | X_OK) == 0)
+			return (path);
+		free(path);
+		i++;
+	}
+	return (path);
+}

@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:38 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/04 11:26:48 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:11:46 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 
 # define RED "\033[0;31m"
@@ -27,8 +28,11 @@
 
 int		check(int ac, char **av);
 int		check_args(int ac, char **av);
+int		check_cmds(char **av);
 int		check_files(char **av);
 int		child(int *fds, char **av, char **env);
 int		parent(int *fds, char **av, char **env);
+char	*get_cmd_name(char *cmd);
+char	*get_cmd_path(char *cmd, char **env);
 
 #endif

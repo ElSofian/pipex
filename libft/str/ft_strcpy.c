@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 10:52:47 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/06 11:09:28 by soelalou         ###   ########.fr       */
+/*   Created: 2023/12/06 17:55:01 by soelalou          #+#    #+#             */
+/*   Updated: 2023/12/06 17:55:08 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strcpy(char *s1, const char *s2)
 {
-	int	i;
+	size_t	cur;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+	cur = 0;
+	while (s2[cur] != '\0')
+	{
+		s1[cur] = s2[cur];
+		cur++;
+	}
+	s1[cur] = '\0';
+	return (s1);
 }

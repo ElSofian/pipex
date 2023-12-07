@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:54:21 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/06 18:03:50 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:19:23 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_cmd_name(char *cmd)
 
 char	**get_path_dirs(char **env)
 {
-	int	i;
+	int		i;
 	char	**dirs;
 
 	i = 0;
@@ -53,12 +53,12 @@ char	*get_cmd_path(char *cmd, char **env)
 	char	*path;
 	char	**dirs;
 
-	i = 0;
+	i = -1;
 	path = NULL;
 	dirs = get_path_dirs(env);
 	if (!dirs)
 		return (NULL);
-	while (dirs[i])
+	while (dirs[++i])
 	{
 		len = ft_strlen(dirs[i]) + ft_strlen(cmd) + 2;
 		path = (char *)malloc(sizeof(char) * len);
@@ -70,7 +70,7 @@ char	*get_cmd_path(char *cmd, char **env)
 		if (access(path, F_OK | X_OK) == 0)
 			return (path);
 		free(path);
-		i++;
 	}
+	ft_freetab(dirs);
 	return (path);
 }

@@ -6,7 +6,7 @@
 #    By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/02 19:46:45 by soelalou          #+#    #+#              #
-#    Updated: 2023/12/06 18:06:26 by soelalou         ###   ########.fr        #
+#    Updated: 2023/12/07 10:05:04 by soelalou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS		= src/main.c src/pipes.c src/utils.c src/errors.c libft/libft.a
+SRCS		= src/main.c src/pipes.c src/utils.c src/errors.c
+OBJS        = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+OBJS_DIR    = bin
 
 # **************************************************************************** #
 # COLORS
@@ -36,27 +38,32 @@ END_COLOR   = \033[0;39m
 # **************************************************************************** #
 # RULES
 
-all: $(NAME)
+all: dependencies $(NAME)
 
-$(NAME): dependencies
+$(NAME): $(OBJS)
 	@touch input.txt
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+	@echo "Salut les mecs" > input.txt
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)[Success]$(END_COLOR) Pipex is ready !"
+
+$(OBJS_DIR)/%.o: src/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 dependencies:
 	@make -s -C libft
-	
+
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJS_DIR)
 	@make clean -s -C libft
-	@echo "$(GREY)[Clean]$(END_COLOR) Objects have been deleted !"
+	@echo "$(GREY)[Clean]$(END_COLOR) Objects have been deleted"
 
 fclean: clean
-	@$(RM) bin $(NAME) input.txt output.txt
+	@$(RM) $(OBJS_DIR) $(NAME) input.txt output.txt src/*.o
 	@make fclean -s -C libft
-	@echo "$(GREY)[Clean]$(END_COLOR) $(NAME) and executables have been deleted !"
+	@echo "$(GREY)[Clean]$(END_COLOR) $(NAME) and executables have been deleted"
 
 re: fclean all
-	@echo "$(PURPLE)[Rebuild]$(END_COLOR) Done !"
+	@echo "$(PURPLE)[Rebuild]$(END_COLOR) Done."
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:53:37 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/06 17:53:42 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/07 09:13:33 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (s1[i] != '\0')
-	{
 		i++;
-	}
 	j = 0;
 	while (s2[j] != '\0')
 	{

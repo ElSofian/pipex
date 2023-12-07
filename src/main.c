@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:18 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/06 18:02:01 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/07 09:51:48 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int ac, char **av, char **env)
 {
 	int		fd[2];
 	pid_t	pid;
-	
+
 	if (check(ac, av) == -1)
 		return (1);
 	if (pipe(fd) < 0)
@@ -32,10 +32,12 @@ int	main(int ac, char **av, char **env)
 	}
 	if (pid == 0)
 	{
-		child(fd, av, env);
+		if (child(fd, av, env) < 0)
+			return (4);
 	}
 	wait(NULL);
-	parent(fd, av, env);
+	if (parent(fd, av, env) < 0)
+		return (5);
 	return (0);
 }
 

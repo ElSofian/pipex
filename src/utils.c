@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:54:21 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/07 10:19:23 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:21:57 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ char	*get_cmd_path(char *cmd, char **env)
 		free(path);
 	}
 	ft_freetab(dirs);
-	return (path);
+	return (NULL);
 }

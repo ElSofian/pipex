@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:18 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/14 13:04:02 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:27:19 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	main(int ac, char **av, char **env)
 		i++;
 	}
 	dup2(fd1, STDOUT_FILENO);
-	execve(get_cmd_path(ft_split(av[ac - 2], ' ')[0], env),
-		ft_split(av[ac - 2], ' '), env);
+	execute_cmd(av[ac - 2], env);
 	return (0);
 }

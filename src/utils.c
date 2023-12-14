@@ -6,11 +6,25 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:54:21 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/14 12:26:32 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:04:41 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
+
+static char	**get_path_dirs(char **env)
+{
+	int		i;
+	char	**dirs;
+
+	i = 0;
+	while (ft_strncmp("PATH", env[i], 4) != 0)
+		i++;
+	dirs = ft_split(env[i] + 5, ':');
+	if (!dirs)
+		return (NULL);
+	return (dirs);
+}
 
 char	*get_cmd_name(char *cmd)
 {
@@ -32,20 +46,6 @@ char	*get_cmd_name(char *cmd)
 	}
 	cmd_name[j] = '\0';
 	return (cmd_name);
-}
-
-char	**get_path_dirs(char **env)
-{
-	int		i;
-	char	**dirs;
-
-	i = 0;
-	while (ft_strncmp("PATH", env[i], 4) != 0)
-		i++;
-	dirs = ft_split(env[i] + 5, ':');
-	if (!dirs)
-		return (NULL);
-	return (dirs);
 }
 
 char	*get_cmd_path(char *cmd, char **env)

@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:38 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/14 12:39:45 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:04:21 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define BLUE "\033[0;34m"
 # define END "\033[0m"
 
-int		child(int cmd_pos, int *fds, char **av, char **env);
-int		parent(int cmd_pos, int *fds, char **av, char **env);
 void	check(int ac, char **av);
 char	*get_cmd_name(char *cmd);
 char	*get_cmd_path(char *cmd, char **env);

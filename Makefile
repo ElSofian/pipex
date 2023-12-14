@@ -6,7 +6,7 @@
 #    By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/02 19:46:45 by soelalou          #+#    #+#              #
-#    Updated: 2023/12/07 10:05:04 by soelalou         ###   ########.fr        #
+#    Updated: 2023/12/14 12:53:24 by soelalou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -rf
 
-SRCS		= src/main.c src/pipes.c src/utils.c src/errors.c
+SRCS		= src/main.c src/utils.c src/errors.c
 OBJS        = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 OBJS_DIR    = bin
 
@@ -42,7 +42,7 @@ all: dependencies $(NAME)
 
 $(NAME): $(OBJS)
 	@touch input.txt
-	@echo "Salut les mecs" > input.txt
+	@echo "Salut les mecs\nMoi c'est Sofian\nCa va ?" > input.txt
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)[Success]$(END_COLOR) Pipex is ready !"
 

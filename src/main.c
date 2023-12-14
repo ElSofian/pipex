@@ -6,7 +6,7 @@
 /*   By: soelalou <soelalou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:33:18 by soelalou          #+#    #+#             */
-/*   Updated: 2023/12/14 12:52:45 by soelalou         ###   ########.fr       */
+/*   Updated: 2023/12/14 12:57:37 by soelalou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	create_pipe(int cmd_pos, char **av, char **env)
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 	}
-	// ft_freetab(cmd);
+	ft_freetab(cmd);
 	free(cmd_path);
 	return (0);
 }
@@ -65,7 +65,6 @@ int	main(int ac, char **av, char **env)
 	dup2(fd0, STDIN_FILENO);
 	while (i < ac - 2)
 	{
-		ft_printf("i: %d\nac - 3: %d\n", i, ac - 3);
 		if (create_pipe(i, av, env) != 0)
 		{
 			perror("[Pipe execution]");
@@ -75,6 +74,5 @@ int	main(int ac, char **av, char **env)
 	}
 	dup2(fd1, STDOUT_FILENO);
 	execve(get_cmd_path(ft_split(av[ac - 2], ' ')[0], env), ft_split(av[ac - 2], ' '), env);
-	ft_printf("i: %d\nac - 3: %d\n", i, ac, - 3);
 	return (0);
 }

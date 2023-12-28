@@ -16,7 +16,7 @@
 NAME        = pipex
 LIBFT		= libft/libft.a
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror -Iinc -g3
 RM          = rm -rf
 
 SRCS		= src/main.c src/utils.c src/errors.c

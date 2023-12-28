@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "pipex.h"
 
 static int	execute_cmd(char *cmd_name, char **env)
 {
@@ -31,15 +31,11 @@ static int	execute_cmd(char *cmd_name, char **env)
 	return (0);
 }
 
-static int	create_pipe(int cmd_pos, char **av, char **env)
+static int	make_pipe(int cmd_pos, char **av, char **env)
 {
 	int		fd[2];
 	pid_t	pid;
-	char	*cmd_path;
-	char	**cmd;
 
-	cmd = NULL;
-	cmd_path = NULL;
 	if (pipe(fd) < 0)
 		return (perror("[Pipe]"), 2);
 	pid = fork();
@@ -70,15 +66,12 @@ int	main(int ac, char **av, char **env)
 	fd0 = open(av[1], O_RDONLY, 0777);
 	fd1 = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (fd0 < 0 || fd1 < 0)
-		return (-1);
+		return (perror("[File]"), 1);
 	dup2(fd0, STDIN_FILENO);
 	while (i < ac - 2)
 	{
-		if (create_pipe(i, av, env) != 0)
-		{
-			perror("[Pipe execution]");
-			return (1);
-		}
+		if (make_pipe(i, av, env) != 0)
+			return (perror("[Pipe execution]"), 2);
 		i++;
 	}
 	dup2(fd1, STDOUT_FILENO);

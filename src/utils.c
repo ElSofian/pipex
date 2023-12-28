@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "pipex.h"
 
 static char	**get_path_dirs(char **env)
 {

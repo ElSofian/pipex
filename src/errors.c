@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "pipex.h"
 
 static int	check_cmds(int ac, char **av)
 {
